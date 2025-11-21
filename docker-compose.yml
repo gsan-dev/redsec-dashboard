@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: redsec_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build: ./frontend
+    container_name: redsec_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    container_name: redsec_db
+    environment:
+      POSTGRES_USER: redsec
+      POSTGRES_PASSWORD: redsecpass
+      POSTGRES_DB: redsec
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redsec_redis
+    ports:
+      - "6379:6379"
+
+  scanner:
+    build: ./scanner
+    container_name: redsec_scanner
+    depends_on:
+      - backend
+
+  worker:
+    build: ./workers
+    container_name: redsec_worker
+    depends_on:
+      - backend
+      - redis
+
+volumes:
+  db_data:
