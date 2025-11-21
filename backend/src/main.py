@@ -5,8 +5,6 @@ import os
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
-
 from .core.plugin_manager import PluginManager
 from .api import routes
 
