@@ -1,0 +1,13 @@
+{
+    "name": "scanner",
+    "version": "1.0.0",
+    "description": "Network Scanner - Detects devices on the local network",
+    "author": "RedSec Team",
+    "endpoints": [
+        "/api/scan",
+        "/api/devices",
+        "/api/device/{ip}"
+    ],
+    "ui_component": "ScannerView",
+    "enabled": true
+}
