@@ -33,7 +33,7 @@ if [ ! -d "venv" ]; then
     python3 -m venv venv
 fi
 
-# Activate virtual environment and start backend
+# Activate virtual environment and start backend on all interfaces
 source venv/bin/activate
 python -m uvicorn src.main:app --reload --host 0.0.0.0 --port 8000 &
 BACKEND_PID=$!
@@ -43,10 +43,10 @@ cd ..
 # Wait a bit for backend to start
 sleep 3
 
-# Start frontend
+# Start frontend on all interfaces
 echo "🎨 Starting Frontend..."
 cd frontend
-npm run dev &
+npm run dev -- --host 0.0.0.0 --port 5173 &
 FRONTEND_PID=$!
 
 cd ..

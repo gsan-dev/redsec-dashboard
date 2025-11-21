@@ -42,7 +42,7 @@ function ScannerView() {
         }, 500);
 
         try {
-            const response = await fetch('http://localhost:8000/api/scan', {
+            const response = await fetch('/api/scan', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

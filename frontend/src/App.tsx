@@ -24,7 +24,7 @@ function App() {
 
   const checkApiHealth = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/health');
+      const response = await fetch('/api/health');
       if (response.ok) {
         setApiStatus('connected');
         await loadPlugins();
@@ -41,7 +41,7 @@ function App() {
 
   const loadPlugins = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/plugins');
+      const response = await fetch('/api/plugins');
       const data = await response.json();
       setPlugins(data.plugins || []);
     } catch (error) {
